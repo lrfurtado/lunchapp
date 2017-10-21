@@ -1,0 +1,18 @@
+package: github.com/lrfurtado/lunchapp
+homepage: https://github.com/lrfurtado
+license: Proprietary
+owners:
+- name: Luciano Furtado
+  email: lrfurtado@gmail.com
+  homepage: http://luciano.company
+import:
+- package: github.com/shogo82148/go-shuffle
+- package: github.com/go-xorm/xorm
+- package: github.com/lib/pq
+- package: github.com/spf13/viper
+- package: github.com/sirupsen/logrus
+- package: golang.org/x/crypto/ssh/terminal
+- package: github.com/codegangsta/inject
+- package: github.com/go-martini/martini
+- package: github.com/martini-contrib/auth
+- package: github.com/martini-contrib/render
