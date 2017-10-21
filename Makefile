@@ -11,3 +11,5 @@ data:
 	awk -F: '{print $1}' /etc/passwd | grep -v '^#' | xargs -L1 -IXXX curl -XPUT -d '{"Name":"XXX"}' http://localhost:3000/employees
 groups:
 	curl http://localhost:3000/groups | jq .
+docker:
+	docker build -t lunchapp:latest .
