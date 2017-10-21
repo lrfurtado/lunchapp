@@ -11,7 +11,7 @@ The main endpoint is /groups endpoint which generates the random groups of emplo
 
 It does this by performing the following logic:
 1. select all employees from postgres 
-1. shuffle slice of employess
+1. shuffle slice of employees
 1. calculate number of groups for each size 
 1. for each group size extract the number groups calculated on the previous step
 1. marshall json output 
