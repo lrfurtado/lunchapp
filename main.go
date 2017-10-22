@@ -38,7 +38,9 @@ func main() {
 	orm.Logger().SetLevel(core.LOG_DEBUG)
 
 	m := martini.Classic()
-	m.Use(render.Renderer())
+	m.Use(render.Renderer(render.Options{
+		Directory: ".",
+	}))
 	m.Put("/employees", AddEmployeeHandler)
 	m.Delete("/employees/:id", DeleteEmployeeHandler)
 	m.Get("/employees", ListEmployeeHandler)
@@ -90,7 +92,7 @@ func DeleteEmployeeHandler(params martini.Params, r render.Render) {
 	r.Text(204, "OK")
 }
 
-func GroupEmployeeHandler(r render.Render) {
+func GroupEmployeeHandler(req *http.Request, r render.Render) {
 	var emps []Employee
 	err := orm.Asc("employee_name").Find(&emps)
 	if err != nil {
@@ -107,7 +109,7 @@ func GroupEmployeeHandler(r render.Render) {
 
 	shuffle.Slice(emps)
 
-	var groups []interface{}
+	var groups [][]Employee
 	offset := 0
 	for groupSize, groupCount := range dist {
 		for i := 0; i < groupCount; i++ {
@@ -116,5 +118,10 @@ func GroupEmployeeHandler(r render.Render) {
 		}
 	}
 
-	r.JSON(200, groups)
+	if req.Header.Get("Content-Type") == "application/json" {
+		r.JSON(200, groups)
+	} else {
+		r.HTML(200, "groups", groups)
+	}
+
 }

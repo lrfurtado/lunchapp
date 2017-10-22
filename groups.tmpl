@@ -1,0 +1,8 @@
+<table border=1>
+{{ range $index, $results :=  . }}
+<tr>
+	<td> Group {{ $index }} </td>
+	{{- range . -}} <td>{{ .Name }}</td> {{- end -}}
+</tr>
+{{ end }}
+</table>
